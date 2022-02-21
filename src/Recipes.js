@@ -1,21 +1,48 @@
 import {useState, useEffect} from 'react';
+import uuid from 'react-uuid';
+import './Recipes.css';
 
 function Recipes() {
-    const [response, setResponse] = useState({});
+    const [response, setResponse] = useState();
 
     useEffect(() => {
-        console.log('hiya');
         async function fetchRecipes() {
             const res = await fetch("https://kazumirecipeapi.uw.r.appspot.com/");
             const json = await res.json();
-            console.log(json);
+            setResponse(json);
         }
         fetchRecipes();
     }, []);
-    console.log(response);
+    if(response !== undefined) {
+        return (
+            <div className='recipes-container'>
+                {response['data'].map((recipe) => 
+                    <div key={uuid()} className='recipe'>
+                        <img src={recipe['image']} alt={recipe['name']}/>
+                        <h2>{recipe['name']}</h2>
+                        <h3 className='ingredients'>Ingredients: {makeIngredients(recipe['ingredients'])}</h3>
+                        <ol className='directions'>
+                            {recipe['directions'].map((direction) => <li key={uuid()}>{direction}</li>)}
+                        </ol>
+                        
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    function makeIngredients(ary) {
+        let ingredients = "";
+        for(let i = 0; i < ary.length - 1; i++) {
+            ingredients += ary[i] + ", ";
+        }
+        ingredients += ary[ary.length - 1];
+        return ingredients;
+    }
+
     return (
         <>
-            <div>hello</div>
+            <div>Downloading Response...</div>
         </>
     );
 }

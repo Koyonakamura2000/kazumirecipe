@@ -1,0 +1,38 @@
+.recipes-container {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    margin: auto;
+    display: grid;
+    row-gap: .5rem;
+}
+
+@media only screen and (min-width: 1024px) {
+    .recipes-container {
+        padding-left: 10%;
+        padding-right: 10%;
+        grid-template-columns: 1fr 1fr;
+        gap: .5rem .5rem;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .recipes-container {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}
+
+.recipe {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.recipe img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    border-radius: .5rem;
+}
