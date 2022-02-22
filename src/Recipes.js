@@ -7,7 +7,7 @@ function Recipes() {
 
     useEffect(() => {
         async function fetchRecipes() {
-            const res = await fetch("https://kazumirecipeapi.uw.r.appspot.com/");
+            const res = await fetch("https://api.kazumirecipe.com/"); // CORS restricted - edit kazumirecipeapi to test API call locally
             const json = await res.json();
             setResponse(json);
         }
